@@ -47,7 +47,7 @@ def create_weather_daily(daily_df):
 day_df_after = pd.read_csv("dashboard_bikeshare/day_after_clean.csv")
 
 with st.sidebar:
-    st.image("bike-logo.png")
+    st.image("dashboard_bikeshare/bike-logo.png")
     
     selected_year = st.selectbox(
         label="Year",
