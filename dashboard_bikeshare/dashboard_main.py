@@ -44,7 +44,7 @@ def create_weather_daily(daily_df):
     }).reset_index()
     return total_weather
 
-day_df_after = pd.read_csv("day_after_clean.csv")
+day_df_after = pd.read_csv("dashboard_bikeshare/day_after_clean.csv")
 
 with st.sidebar:
     st.image("bike-logo.png")
