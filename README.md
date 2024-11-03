@@ -8,7 +8,7 @@ pip install -r requirements.txt
 ---
 ## Run Streamlit
 ```
-streamlit run dashboard_main.py
+streamlit run dashboard_bikeshare/dashboard_main.py
 ```
 ---
 ## My Dashboard Link
