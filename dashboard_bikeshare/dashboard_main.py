@@ -4,6 +4,12 @@ import seaborn as sns
 import streamlit as st
 from babel.numbers import format_currency
 
+def calculate_correlation(daily_df, target='cnt'):
+    relevant_data = daily_df[['temp', 'atemp', 'hum', 'windspeed', 'cnt']]
+    correlation_matrix = relevant_data.corr()
+    target_correlation = correlation_matrix[target]
+    return target_correlation, correlation_matrix
+
 def create_monthly_rentals(daily_df):
     month_daily = daily_df.groupby(by=['mnth'],sort=False).agg({
     "cnt":"sum"
@@ -79,7 +85,18 @@ with col2:
     if selected_year == 2012:
         st.metric("Average", value=mean_2012, delta=str("+{avg_mean}%".format(avg_mean=avg_mean)))
     else:
-        st.metric("Average", value=mean_2011)    
+        st.metric("Average", value=mean_2011)
+
+st.subheader(f"Weather and Environmental Impact on Rental Counts in {selected_year}")
+
+target_correlation, correlation_matrix = calculate_correlation(daily_df)
+
+plt.figure(figsize=(10, 8))
+sns.heatmap(correlation_matrix, annot=True, fmt=".2f", cmap="coolwarm", center=0)
+plt.title(f"Heatmap Correlation pada {selected_year}")
+plt.xticks(rotation=45)
+plt.yticks(rotation=45)
+st.pyplot(plt)
 
 monthly_rentals = create_monthly_rentals(daily_df)
 
